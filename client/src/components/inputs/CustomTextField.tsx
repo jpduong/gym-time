@@ -2,14 +2,11 @@ import { Box, TextField } from "@material-ui/core";
 import { FieldAttributes, useField } from "formik";
 import { startCase } from "lodash";
 
-export const CustomTextField: React.FC<FieldAttributes<{}>> = ({
-  placeholder,
-  type = "text",
-  ...props
-}) => {
-  const [field, meta] = useField<{}>(props);
+export const CustomTextField = (props: FieldAttributes<{}>) => {
+  const { placeholder, type = "text", ...otherProps } = props;
+  const [field, meta] = useField<{}>(otherProps);
   const errorText = meta.error && meta.touched ? meta.error : "";
-  const formattedLabel = startCase(props.name);
+  const formattedLabel = startCase(otherProps.name);
 
   return (
     <Box mb={2}>
