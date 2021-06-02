@@ -8,6 +8,11 @@ export const muiTheme = createMuiTheme({
       fullWidth: true,
       autoComplete: "on",
     },
+    MuiButton: {
+      variant: "outlined",
+      fullWidth: true,
+      size: "large",
+    },
   },
   overrides: {
     MuiButton: {

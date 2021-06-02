@@ -1,6 +1,8 @@
-import { Button, Container } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { CustomTextField } from "components/inputs/CustomTextField";
+import { CustomButton } from "components/shared/CustomButton";
 import { ServerResponseTypography } from "components/typography/ServerResponseTypography";
+import { SUCCESSFUL_REGISTRATION_MESSAGE } from "../../constants";
 import { Form, Formik } from "formik";
 import { omit } from "lodash";
 import React, { useState } from "react";
@@ -38,8 +40,7 @@ export const SignUpForm = () => {
 
       if (data.register.user) {
         return setServerResponse({
-          message:
-            "Successfully registered, please check your email inbox to verify",
+          message: SUCCESSFUL_REGISTRATION_MESSAGE,
           isError: false,
         });
       }
@@ -67,15 +68,7 @@ export const SignUpForm = () => {
                 {...(hasPasswordString(name) && { type: "password" })}
               />
             ))}
-            <Button
-              type="submit"
-              disabled={loading}
-              variant="outlined"
-              fullWidth
-              size="large"
-            >
-              Sign Up
-            </Button>
+            <CustomButton text="Sign Up" type="submit" isLoading={loading} />
             {serverResponse && (
               <ServerResponseTypography serverResponse={serverResponse} />
             )}

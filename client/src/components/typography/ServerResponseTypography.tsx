@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import React from "react";
 import { ServerResponse } from "types/custom";
 
@@ -12,8 +12,10 @@ export const ServerResponseTypography = (props: Props) => {
   } = props;
 
   return (
-    <Typography style={{ color: isError ? "red" : "green" }}>
-      {message}
-    </Typography>
+    <Box mt={1}>
+      <Typography style={{ color: isError ? "red" : "green" }}>
+        {message}
+      </Typography>
+    </Box>
   );
 };
