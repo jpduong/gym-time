@@ -1,0 +1,5 @@
+export const MAX = {
+  FULL_NAME_LENGTH: 70,
+  EMAIL_LENGTH: 70,
+  PASSWORD_LENGTH: 20,
+};
