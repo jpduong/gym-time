@@ -8,6 +8,7 @@ import { UserResolver } from "./resolvers/user";
 import jwt from "jsonwebtoken";
 import { UserModel } from "./entities/User";
 import { CONFIG } from "./config";
+import { JWTPayload } from "./types/jwt-payload";
 
 const main = async () => {
   try {
@@ -29,7 +30,10 @@ const main = async () => {
       try {
         const {
           user: { _id },
-        } = jwt.verify(req.params.token, process.env.EMAIL_SECRET) as any; //tofix
+        } = jwt.verify(
+          req.params.token,
+          process.env.EMAIL_SECRET
+        ) as JWTPayload;
         await UserModel.update({ isEmailValidated: true }, { where: { _id } });
       } catch (e) {
         res.send("error");

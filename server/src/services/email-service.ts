@@ -5,6 +5,7 @@ import mg from "mailgun-js";
 import { CONFIG } from "../config";
 import { createEmailVerificationTemplate } from "../email-templates/email-verification";
 import { User } from "../entities/User";
+import { JWTPayload } from "../types/jwt-payload";
 
 const mailgun = mg({
   apiKey: process.env.MAIL_GUN_API_KEY,
@@ -18,7 +19,7 @@ export class EmailService {
     jwt.sign(
       {
         user: pick(user, "_id"),
-      },
+      } as JWTPayload,
       process.env.EMAIL_SECRET,
       {
         expiresIn: "1d",
