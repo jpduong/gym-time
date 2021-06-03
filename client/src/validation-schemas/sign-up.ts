@@ -1,5 +1,5 @@
 import { MAX } from "config/validation";
-import { requiredText } from "utils";
+import { requiredText } from "utils/required-text";
 import * as yup from "yup";
 
 const fullNameRegex = /^[a-zA-Z ]+$/;

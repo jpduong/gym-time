@@ -1,11 +1,11 @@
 import { SignUpForm } from "components/forms/SignUp";
+import { Header } from "components/shared/Header";
 import React from "react";
-import { SignUpHeader } from "./Header";
 
 export const SignUpPage = () => {
   return (
     <>
-      <SignUpHeader />
+      <Header heading="It's free. Only a minute to complete" />
       <SignUpForm />
     </>
   );
