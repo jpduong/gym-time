@@ -9,7 +9,7 @@ const fullNameRegex = /^[a-zA-Z ]+$/;
 const isLettersAndSpaces = (value: string | undefined) =>
   value ? fullNameRegex.test(value) : false;
 
-export const SignUpSchema = yup.object({
+export const RegisterSchema = yup.object({
   fullName: yup
     .string()
     .test(
@@ -34,7 +34,7 @@ export const validateRegister = async (input: RegisterInput) => {
   const errors: FieldError[] = [];
 
   try {
-    await SignUpSchema.validate(input, {
+    await RegisterSchema.validate(input, {
       abortEarly: false,
     });
   } catch (ex) {

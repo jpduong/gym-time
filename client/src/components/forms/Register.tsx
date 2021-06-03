@@ -26,7 +26,7 @@ const initialValues = {
 
 const fieldNames = Object.keys(initialValues);
 
-export const SignUpForm = () => {
+export const RegisterForm = () => {
   const [register, { loading }] = useRegisterMutation({});
   const history = useHistory();
 
@@ -44,10 +44,10 @@ export const SignUpForm = () => {
             return history.push(PATHS.REGISTERED);
           }
         }}
-        // validationSchema={SignUpSchema}
+        // validationSchema={RegisterSchema} //tofix - reenable
       >
         {({ values, errors }) => (
-          <Form title="component-signup-form">
+          <Form title="component-register-form">
             {fieldNames.map((name, i) => (
               <CustomTextField
                 name={name}
@@ -56,6 +56,7 @@ export const SignUpForm = () => {
               />
             ))}
             <CustomButton text="Sign Up" type="submit" isLoading={loading} />
+            {/* tofix - delete debugging code below */}
             <pre>{JSON.stringify(values, null, 2)}</pre>
             <pre>{JSON.stringify(errors, null, 2)}</pre>
           </Form>

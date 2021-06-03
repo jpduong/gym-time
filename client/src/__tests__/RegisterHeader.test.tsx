@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { SignUpHeader } from "components/pages/SignUp/Header";
+import { RegisterHeader } from "components/pages/Register/Header";
 
 beforeEach(() => {
-  render(<SignUpHeader />);
+  render(<RegisterHeader />);
 });
 
-describe("SignUpHeader render", () => {
+describe("RegisterHeader render", () => {
   it("component", () => {
     expect(screen.getByTitle("component-sign-up-header")).toBeTruthy();
   });

@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { SignUpPage } from "components/pages/SignUp";
+import { RegisterPage } from "components/pages/Register";
 
 beforeEach(() => {
-  render(<SignUpPage />);
+  render(<RegisterPage />);
 });
 
-describe("SignUpPage render", () => {
+describe("RegisterPage render", () => {
   it("component", () => {
     expect(screen.getByTitle("component-sign-up-page")).toBeTruthy();
   });
