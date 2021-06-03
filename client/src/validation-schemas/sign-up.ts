@@ -10,12 +10,12 @@ const isLettersAndSpaces = (value: string | undefined) =>
 export const SignUpSchema = yup.object({
   fullName: yup
     .string()
-    .required(requiredText("full name"))
     .test(
       "isLettersAndSpaces",
       "Full name can only contain letters and spaces",
       isLettersAndSpaces
     )
+    .required(requiredText("full name"))
     .max(MAX.FULL_NAME_LENGTH),
   email: yup
     .string()
