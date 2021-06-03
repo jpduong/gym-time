@@ -1,7 +1,6 @@
 import { Container } from "@material-ui/core";
 import { CustomTextField } from "components/inputs/CustomTextField";
 import { CustomButton } from "components/shared/CustomButton";
-import { ServerResponseTypography } from "components/typography/ServerResponseTypography";
 import { PATHS } from "constants/paths";
 import { Form, Formik } from "formik";
 import { omit } from "lodash";
