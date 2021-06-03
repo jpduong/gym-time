@@ -4,16 +4,17 @@ import React from "react";
 
 type Props = {
   heading: string;
+  color?: "green";
 };
 
 export const Header = (props: Props) => {
-  const { heading } = props;
+  const { heading, color } = props;
 
   return (
     <>
       <img src={gymLogo} alt="gym logo" />
       <Box my={2}>
-        <Typography>{heading}</Typography>
+        <Typography style={{ color }}>{heading}</Typography>
       </Box>
     </>
   );

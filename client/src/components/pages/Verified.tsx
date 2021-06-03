@@ -4,7 +4,7 @@ import React from "react";
 export const VerifiedPage = () => {
   return (
     <>
-      <Header heading="Successfully verified!" />
+      <Header heading="Successfully verified!" color="green" />
     </>
   );
 };

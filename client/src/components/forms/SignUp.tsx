@@ -41,7 +41,7 @@ export const SignUpForm = () => {
           if (response.data?.register.errors) {
             return setErrors(toErrorMap(response.data.register.errors));
           } else if (response.data?.register?.user) {
-            history.push(PATHS.REGISTERED);
+            return history.push(PATHS.REGISTERED);
           }
         }}
         // validationSchema={SignUpSchema}
