@@ -5,6 +5,7 @@ import { EmailService } from "../services/email-service";
 import { validateRegister } from "../utils/validate-register";
 import { RegisterInput } from "./types/user/user-input";
 import { RegisterResponse } from "./types/user/user-response";
+import argon2 from "argon2";
 
 const EmailServiceInstance = new EmailService();
 
@@ -12,9 +13,7 @@ const EmailServiceInstance = new EmailService();
 export class UserResolver {
   @Query(() => [User])
   async users(): Promise<User[]> {
-    const users = await UserModel.find();
-
-    return users;
+    return await UserModel.find();
   }
 
   @Mutation(() => RegisterResponse)
@@ -30,9 +29,12 @@ export class UserResolver {
       };
     }
 
+    const hashedPassword = await argon2.hash(registerInput.password);
+
     try {
       const user = await UserModel.create({
         ...registerInput,
+        password: hashedPassword,
       });
 
       EmailServiceInstance.sendEmail(user);
@@ -43,7 +45,7 @@ export class UserResolver {
     } catch (ex) {
       if (ex.message.indexOf("11000") != -1) {
         return {
-          errors: [{ field: "username", message: "this email exists already" }],
+          errors: [{ field: "email", message: "this email exists already" }],
         };
       }
     }
