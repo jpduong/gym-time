@@ -10,6 +10,7 @@ import { useRegisterMutation } from "types/generated";
 import { hasPasswordString } from "utils/has-password-string";
 import { toErrorMap } from "utils/to-error-map";
 
+// todo - to swap below
 // const initialValues = {
 //   fullName: "",
 //   email: "",

@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import { MAX } from "../config/validation";
-import { FieldError } from "../resolvers/types/user/shared/field-error";
+import { FieldError } from "../resolvers/types/shared/field-error";
 import { RegisterInput } from "../resolvers/types/user/user-input";
 import { requiredText } from "./required-text";
 
