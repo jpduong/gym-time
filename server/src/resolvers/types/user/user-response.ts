@@ -11,8 +11,8 @@ class FieldError {
 
 @ObjectType()
 export class RegisterResponse {
-  @Field(() => FieldError, { nullable: true })
-  error?: FieldError;
+  @Field(() => [FieldError], { nullable: true })
+  errors?: FieldError[];
 
   @Field(() => User, { nullable: true })
   user?: User;

@@ -1,9 +1,10 @@
 import { Arg, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
 import { User, UserModel } from "../entities/User";
-import { HashPassword, ToLowerCase } from "../middleware/inputs";
-import { UserInput } from "./types/user/user-input";
-import { RegisterResponse } from "./types/user/user-response";
+import { EmailToLowerCase } from "../middleware/email-input-to-lowercase";
 import { EmailService } from "../services/email-service";
+import { validateRegister } from "../utils/validate-register";
+import { RegisterInput } from "./types/user/user-input";
+import { RegisterResponse } from "./types/user/user-response";
 
 const EmailServiceInstance = new EmailService();
 
@@ -17,22 +18,32 @@ export class UserResolver {
   }
 
   @Mutation(() => RegisterResponse)
-  @UseMiddleware(ToLowerCase, HashPassword)
+  @UseMiddleware(EmailToLowerCase)
   async register(
-    @Arg("userInput") userInput: UserInput
+    @Arg("input") registerInput: RegisterInput
   ): Promise<RegisterResponse> {
+    const errors = validateRegister(registerInput);
+
+    if (errors.length) {
+      return {
+        errors,
+      };
+    }
+
     try {
       const user = await UserModel.create({
-        ...userInput,
+        ...registerInput,
       });
-      await EmailServiceInstance.sendEmail(user);
+
+      EmailServiceInstance.sendEmail(user);
+
       return {
         user,
       };
     } catch (ex) {
       if (ex.message.indexOf("11000") != -1) {
         return {
-          error: { field: "username", message: "this email exists already" },
+          errors: [{ field: "username", message: "this email exists already" }],
         };
       }
     }
