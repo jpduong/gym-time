@@ -35,7 +35,7 @@ const main = async () => {
         res.send("error");
       }
 
-      return res.redirect(`${CONFIG.CLIENT_URL}/success`);
+      return res.redirect(`${CONFIG.CLIENT_URL}/verified`);
     });
     apolloServer.applyMiddleware({ app });
 

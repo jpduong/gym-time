@@ -22,7 +22,8 @@
     "mailgun-js": "^0.22.0",
     "mongodb": "^3.6.9",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^1.1.1"
+    "type-graphql": "^1.1.1",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.1",

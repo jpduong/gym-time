@@ -4,14 +4,18 @@ import * as yup from "yup";
 
 const fullNameRegex = /^[a-zA-Z ]+$/;
 
-const charsOnly = (value: string | undefined) =>
+const isLettersAndSpaces = (value: string | undefined) =>
   value ? fullNameRegex.test(value) : false;
 
 export const SignUpSchema = yup.object({
   fullName: yup
     .string()
     .required(requiredText("full name"))
-    .test("chars only", "field should have chars only", charsOnly)
+    .test(
+      "isLettersAndSpaces",
+      "Full name can only contain letters and spaces",
+      isLettersAndSpaces
+    )
     .max(MAX.FULL_NAME_LENGTH),
   email: yup
     .string()

@@ -22,7 +22,7 @@ export class UserResolver {
   async register(
     @Arg("input") registerInput: RegisterInput
   ): Promise<RegisterResponse> {
-    const errors = validateRegister(registerInput);
+    const errors = await validateRegister(registerInput);
 
     if (errors.length) {
       return {
