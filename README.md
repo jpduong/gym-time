@@ -60,3 +60,16 @@ $ npm start
 ### Tooling / Other Tech Worth Mentioning
 
 - Lodash / Argon2 / GraphQL Code Generator
+
+![Register Flow (high level)](./register-flow.svg)
+
+## Comments
+
+- I think implementing input validation on both client and server sides provides the best outcome. On the client side, we can reduce unncessary server requests and get faster response times on providing feedback to the user. Validating on the server side gives us confidence on the data consistency and before being saved into the database. I like to think that the server side validation is even more important as it sits closer to the data. New client apps can be built with no input validation, increasing the benefit of server side valiation as an extra layer of security.
+- The input requirements implemented in this project are loose, e.g. full names have a basic max character restriction. Further restrictions could be disallowing number characters. The validation implementation was focused on demonstrating how the validation logic is architectured.
+- Sanitizing the register input was also an implemented feature, primarily removing unncessary white spaces
+- Thought about whether it was a good idea to lowercase all emails and full names before saving to the database to ensure data consistency, but upon researching - I decided not to. As a user, if I liked to spell my email in all uppercase, it should be reflected in the saved data. This makes sense, so I opted for this. However, I think there's no 100% right answer, and this stems down to the specific use case
+
+### Potential Improvements
+
+- There is code duplication regarding the validation schemas done on both client and serve side. Ideally, the code and logic could be refactored into a centralized place to adhere to _DRY_ principles
