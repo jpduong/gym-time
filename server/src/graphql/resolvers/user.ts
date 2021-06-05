@@ -1,10 +1,10 @@
 import { Arg, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
 import { User, UserModel } from "../entities/User";
 import { SanitizeRegisterInput } from "../middleware/sanitize-register-input";
-import { EmailService } from "../services/email-service";
-import { validateRegister } from "../utils/validate-register";
-import { RegisterInput } from "./types/user/user-input";
-import { RegisterResponse } from "./types/user/user-response";
+import { EmailService } from "../../services/email";
+import { validateRegister } from "../../utils/validate-register";
+import { RegisterInput } from "../types/user/user-input";
+import { RegisterResponse } from "../types/user/user-response";
 import argon2 from "argon2";
 
 const EmailServiceInstance = new EmailService();

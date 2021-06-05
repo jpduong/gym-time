@@ -1,5 +1,5 @@
-import { FieldError } from "../resolvers/types/shared/field-error";
-import { RegisterInput } from "../resolvers/types/user/user-input";
+import { FieldError } from "../graphql/types/shared/field-error";
+import { RegisterInput } from "../graphql/types/user/user-input";
 import { RegisterSchema } from "../yup-schemas/register";
 
 export const validateRegister = async (input: RegisterInput) => {

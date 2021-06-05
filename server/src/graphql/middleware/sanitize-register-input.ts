@@ -1,9 +1,9 @@
 import { MiddlewareFn } from "type-graphql";
-import { RegisterInput } from "../resolvers/types/user/user-input";
+import { RegisterInput } from "../types/user/user-input";
 import {
   removeDoubleSpaces,
   removeLeadingTrailingSpaces,
-} from "../utils/sanitize-input";
+} from "../../utils/sanitize-input";
 
 export const SanitizeRegisterInput: MiddlewareFn<{
   data: { input: RegisterInput };

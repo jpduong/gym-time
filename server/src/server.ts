@@ -1,14 +1,16 @@
 require("dotenv").config();
 import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
-import Express from "express";
+import express from "express";
 import mongoose from "mongoose";
 import { buildSchema } from "type-graphql";
-import { UserResolver } from "./resolvers/user";
-import jwt from "jsonwebtoken";
-import { UserModel } from "./entities/User";
 import { CONFIG } from "./config";
-import { JWTPayload } from "./types/jwt-payload";
+import { UserResolver } from "./graphql/resolvers/user";
+import routes from "./rest/routes";
+
+const app = express();
+
+app.use("/", routes);
 
 const main = async () => {
   try {
@@ -24,30 +26,13 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({ schema });
 
-    const app = Express();
-
-    app.get("/confirmation/:token", async (req, res) => {
-      try {
-        const {
-          user: { _id },
-        } = jwt.verify(
-          req.params.token,
-          process.env.EMAIL_SECRET
-        ) as JWTPayload;
-        await UserModel.update({ isEmailValidated: true }, { where: { _id } });
-      } catch (e) {
-        res.send("error");
-      }
-
-      return res.redirect(`${CONFIG.CLIENT_URL}/verified`);
-    });
     apolloServer.applyMiddleware({ app });
 
     app.listen(CONFIG.PORT, () => {
       console.log(`server started on ${CONFIG.API_URL}/graphql`);
     });
   } catch (ex) {
-    console.log("main EXCEPTION", ex);
+    console.log("EXCEPTION - main", ex);
   }
 };
 

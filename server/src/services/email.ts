@@ -4,7 +4,7 @@ import { pick } from "lodash";
 import mg from "mailgun-js";
 import { CONFIG } from "../config";
 import { createEmailVerificationTemplate } from "../email-templates/email-verification";
-import { User } from "../entities/User";
+import { User } from "../graphql/entities/User";
 import { JWTPayload } from "../types/jwt-payload";
 
 const mailgun = mg({
