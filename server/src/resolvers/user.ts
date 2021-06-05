@@ -1,6 +1,6 @@
 import { Arg, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
 import { User, UserModel } from "../entities/User";
-import { EmailToLowerCase } from "../middleware/email-input-to-lowercase";
+import { SanitizeRegisterInput } from "../middleware/sanitize-register-input";
 import { EmailService } from "../services/email-service";
 import { validateRegister } from "../utils/validate-register";
 import { RegisterInput } from "./types/user/user-input";
@@ -17,7 +17,7 @@ export class UserResolver {
   }
 
   @Mutation(() => RegisterResponse)
-  @UseMiddleware(EmailToLowerCase)
+  @UseMiddleware(SanitizeRegisterInput)
   async register(
     @Arg("input") registerInput: RegisterInput
   ): Promise<RegisterResponse> {
@@ -45,7 +45,7 @@ export class UserResolver {
     } catch (ex) {
       if (ex.message.indexOf("11000") != -1) {
         return {
-          errors: [{ field: "email", message: "this email exists already" }],
+          errors: [{ field: "email", message: "This email exists already" }],
         };
       }
     }

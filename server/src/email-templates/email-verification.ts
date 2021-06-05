@@ -1,5 +1,3 @@
-import sgMail from "@sendgrid/mail";
-
 export const createEmailVerificationTemplate = (to: string, link: string) => {
   const message = `Please click the link to verify your email  <a href="${link}">${link}</a>`;
 
