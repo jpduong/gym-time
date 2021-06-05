@@ -2,9 +2,9 @@ import sgMail from "@sendgrid/mail";
 import jwt from "jsonwebtoken";
 import { pick } from "lodash";
 import mg from "mailgun-js";
-import { CONFIG } from "../config";
+import { CONFIG } from "../config/app";
 import { createEmailVerificationTemplate } from "../email-templates/email-verification";
-import { User } from "../graphql/entities/User";
+import { User, UserModel } from "../graphql/entities/User";
 import { JWTPayload } from "../types/jwt-payload";
 
 const mailgun = mg({
@@ -32,15 +32,28 @@ export class EmailService {
         const url = `${CONFIG.API_URL}/confirmation/${emailToken}`;
         const emailData = createEmailVerificationTemplate(user.email, url);
 
-        sgMail.send(emailData).catch((ex) => {
-          console.log("EXCEPTION - SendGrid sendEmail", ex);
+        const updateUserEmailStatus = async () =>
+          await UserModel.updateOne(
+            { _id: user._id },
+            { isVerificationEmailSent: true }
+          );
 
-          mailgun.messages().send(emailData, function (ex) {
-            if (ex) {
-              console.log("EXCEPTION - mailgun sendEmail", ex);
-            }
+        sgMail
+          .send(emailData)
+          .then(() => updateUserEmailStatus())
+          .catch((ex) => {
+            console.log("EXCEPTION - SendGrid sendEmail", ex);
+
+            mailgun.messages().send(emailData, function (ex, body) {
+              if (ex) {
+                console.log("EXCEPTION - mailgun sendEmail", ex);
+              }
+
+              if (body) {
+                updateUserEmailStatus();
+              }
+            });
           });
-        });
       }
     );
   }

@@ -1,6 +1,6 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import { CONFIG } from "../config";
+import { CONFIG } from "../config/app";
 import { UserModel } from "../graphql/entities/User";
 import { JWTPayload } from "../types/jwt-payload";
 
