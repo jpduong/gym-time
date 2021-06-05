@@ -33,7 +33,7 @@ export const RegisterForm = () => {
   const history = useHistory();
 
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth="xs" title="component-register-form">
       <Formik
         initialValues={initialValues}
         onSubmit={async (data, { setErrors }) => {
@@ -51,7 +51,7 @@ export const RegisterForm = () => {
         validationSchema={RegisterSchema} //tofix - reenable
       >
         {({ values, errors }) => (
-          <Form title="component-register-form">
+          <Form>
             {fieldNames.map((name, i) => (
               <CustomTextField
                 name={name}
