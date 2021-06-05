@@ -14,7 +14,9 @@ export const Header = (props: Props) => {
     <>
       <img src={gymLogo} alt="gym logo" />
       <Box my={2}>
-        <Typography style={{ color }}>{heading}</Typography>
+        <Typography style={{ color }} title="component-header">
+          {heading}
+        </Typography>
       </Box>
     </>
   );

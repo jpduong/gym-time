@@ -19,14 +19,14 @@ const initialValues = {
   confirmPassword: "",
 };
 
-// const initialValues = {
-//   fullName: "james",
-//   email: "james.duong93@gmail.com",
-//   password: "password",
-//   confirmPassword: "password",
-// };
+export const validInitialValues = {
+  fullName: "james",
+  email: "james.duong93@gmail.com",
+  password: "password",
+  confirmPassword: "password",
+};
 
-const fieldNames = Object.keys(initialValues);
+export const fieldNames = Object.keys(initialValues);
 
 export const RegisterForm = () => {
   const [register, { loading }] = useRegisterMutation({});
@@ -42,7 +42,7 @@ export const RegisterForm = () => {
           // const input = omit(data, ["confirmPassword"]);
           // const response = await register({ variables: { input } });
 
-          // if (response.data?.register.errors) {
+          // if (response.data?.register?.errors) {
           //   return setErrors(toErrorMap(response.data.register.errors));
           // } else if (response.data?.register?.user) {
           //   return history.push(PATHS.REGISTERED);
@@ -57,6 +57,7 @@ export const RegisterForm = () => {
                 name={name}
                 key={i}
                 {...(hasPasswordString(name) && { type: "password" })}
+                title={`component-custom-textfield-${name}`}
               />
             ))}
             <CustomButton text="Sign Up" type="submit" isLoading={loading} />

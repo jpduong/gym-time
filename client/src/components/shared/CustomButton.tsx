@@ -16,9 +16,14 @@ export const CustomButton = (props: Props) => {
   const theme = useTheme();
 
   return (
-    <Button disabled={isLoading} {...otherProps}>
+    <Button
+      disabled={isLoading}
+      {...otherProps}
+      title="component-custom-button"
+    >
       {isLoading && (
         <CircularProgress
+          title="component-custom-button-loader"
           size={20}
           color="inherit"
           style={{ marginRight: theme.spacing(1) }}

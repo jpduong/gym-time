@@ -20,8 +20,8 @@ beforeEach(() => {
   );
 });
 
-describe("CustomTextField render", () => {
-  it("component", () => {
+describe("CustomTextField", () => {
+  it("component renders", () => {
     expect(screen.getByTitle("component-custom-textfield")).toBeTruthy();
   });
 });

@@ -3,7 +3,7 @@ import { FieldAttributes, useField } from "formik";
 import { startCase } from "lodash";
 
 export const CustomTextField = (props: FieldAttributes<{}>) => {
-  const { placeholder, type = "text", ...otherProps } = props;
+  const { placeholder, type = "text", title, ...otherProps } = props;
   const [field, meta] = useField<{}>(otherProps);
   const errorText = meta.error && meta.touched ? meta.error : "";
   const formattedLabel = startCase(otherProps.name);
@@ -14,7 +14,7 @@ export const CustomTextField = (props: FieldAttributes<{}>) => {
         <label>{formattedLabel}</label>
       </Box>
       <TextField
-        title="component-custom-textfield"
+        title={title || "component-custom-textfield"}
         placeholder={placeholder}
         type={type}
         helperText={errorText}

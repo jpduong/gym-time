@@ -9,7 +9,7 @@ export const AppContainer = (props: Props) => {
   const { children } = props;
 
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth="xs" title="component-app">
       <Box pt={10}>
         <Grid container justify="center" alignItems="center" direction="column">
           {children}
