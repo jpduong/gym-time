@@ -31,23 +31,15 @@ export class UserResolver {
 
     const hashedPassword = await argon2.hash(registerInput.password);
 
-    try {
-      const user = await UserModel.create({
-        ...registerInput,
-        password: hashedPassword,
-      });
+    const user = await UserModel.create({
+      ...registerInput,
+      password: hashedPassword,
+    });
 
-      EmailServiceInstance.sendEmail(user);
+    EmailServiceInstance.sendEmail(user);
 
-      return {
-        user,
-      };
-    } catch (ex) {
-      if (ex.message.indexOf("11000") != -1) {
-        return {
-          errors: [{ field: "email", message: "This email exists already" }],
-        };
-      }
-    }
+    return {
+      user,
+    };
   }
 }

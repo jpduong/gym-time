@@ -1,22 +1,15 @@
 import { MiddlewareFn } from "type-graphql";
+import { removeDoubleSpaces } from "../../utils/sanitize-input";
 import { RegisterInput } from "../types/user/user-input";
-import {
-  removeDoubleSpaces,
-  removeLeadingTrailingSpaces,
-} from "../../utils/sanitize-input";
 
 export const SanitizeRegisterInput: MiddlewareFn<{
   data: { input: RegisterInput };
 }> = async (data, next) => {
-  const sanitizedFirstName = removeLeadingTrailingSpaces(
-    data.args.input.fullName
-  );
-  const sanitizedEmail = removeDoubleSpaces(
-    removeLeadingTrailingSpaces(data.args.input.email)
-  );
+  const sanitizedFullName = removeDoubleSpaces(data.args.input.fullName);
+  const sanitizedEmail = data.args.input.email.trim();
 
   data.args.input.email = sanitizedEmail;
-  data.args.input.sanitizedFirstName = sanitizedFirstName;
+  data.args.input.fullName = sanitizedFullName;
 
   return await next();
 };

@@ -4,9 +4,10 @@ import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import mongoose from "mongoose";
 import { buildSchema } from "type-graphql";
-import { CONFIG } from "./config";
+import { CONFIG } from "./config/app";
 import { UserResolver } from "./graphql/resolvers/user";
 import routes from "./rest/routes";
+import { connectMongoDB } from "./utils/connect-mongo";
 
 const app = express();
 
@@ -14,11 +15,7 @@ app.use("/", routes);
 
 const main = async () => {
   try {
-    await mongoose.connect(CONFIG.MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      dbName: CONFIG.MONGO_DB_NAME,
-    });
+    await connectMongoDB(false);
 
     const schema = await buildSchema({
       resolvers: [UserResolver],

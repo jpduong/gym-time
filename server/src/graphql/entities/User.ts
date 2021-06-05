@@ -3,7 +3,6 @@ import { ObjectId } from "mongodb";
 import { Field, ObjectType } from "type-graphql";
 import { ObjectIdScalar } from "../scalars/object-id";
 
-@index({ email: 1 }, { unique: true, collation: { locale: "en", strength: 2 } })
 @ObjectType()
 export class User {
   @Field(() => ObjectIdScalar)
@@ -27,8 +26,10 @@ export class User {
   @Field()
   @prop({ required: true, default: false })
   isEmailValidated?: boolean;
+
+  @Field()
+  @prop({ required: true, default: false })
+  isVerificationEmailSent?: boolean;
 }
 
 export const UserModel = getModelForClass(User);
-
-UserModel.createIndexes();
