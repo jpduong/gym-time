@@ -9,21 +9,22 @@ import { useHistory } from "react-router";
 import { useRegisterMutation } from "types/generated";
 import { hasPasswordString } from "utils/has-password-string";
 import { toErrorMap } from "utils/to-error-map";
+import { RegisterSchema } from "validation-schemas/register";
 
 // todo - to swap below
-// const initialValues = {
-//   fullName: "",
-//   email: "",
-//   password: "",
-//   confirmPassword: "",
-// };
-
 const initialValues = {
-  fullName: "james",
-  email: "james.duong93@gmail.com",
-  password: "password",
-  confirmPassword: "password",
+  fullName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
 };
+
+// const initialValues = {
+//   fullName: "james",
+//   email: "james.duong93@gmail.com",
+//   password: "password",
+//   confirmPassword: "password",
+// };
 
 const fieldNames = Object.keys(initialValues);
 
@@ -36,16 +37,18 @@ export const RegisterForm = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={async (data, { setErrors }) => {
-          const input = omit(data, ["confirmPassword"]);
-          const response = await register({ variables: { input } });
+          console.log("data", data);
 
-          if (response.data?.register.errors) {
-            return setErrors(toErrorMap(response.data.register.errors));
-          } else if (response.data?.register?.user) {
-            return history.push(PATHS.REGISTERED);
-          }
+          // const input = omit(data, ["confirmPassword"]);
+          // const response = await register({ variables: { input } });
+
+          // if (response.data?.register.errors) {
+          //   return setErrors(toErrorMap(response.data.register.errors));
+          // } else if (response.data?.register?.user) {
+          //   return history.push(PATHS.REGISTERED);
+          // }
         }}
-        // validationSchema={RegisterSchema} //tofix - reenable
+        validationSchema={RegisterSchema} //tofix - reenable
       >
         {({ values, errors }) => (
           <Form title="component-register-form">

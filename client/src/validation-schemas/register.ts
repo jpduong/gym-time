@@ -1,39 +1,33 @@
-import { MAX } from "config/validation";
-import { requiredText } from "utils/required-text";
+import { EMAIL, FULL_NAME, PASSWORD } from "config/validation";
+import {
+  confirmPasswordMismatch,
+  requiredText,
+} from "constants/validation-texts";
+import { removeDoubleSpaces } from "utils/sanitize-input";
+import { createMaxText } from "utils/validation-text-creater";
 import * as yup from "yup";
-
-const fullNameRegex = /^[a-zA-Z ]+$/;
-
-const isLettersAndSpaces = (value: string | undefined) =>
-  value ? fullNameRegex.test(value) : false;
 
 export const RegisterSchema = yup.object({
   fullName: yup
     .string()
-    .test(
-      "isLettersAndSpaces",
-      "Full name can only contain letters and spaces",
-      isLettersAndSpaces
-    )
-    .required(requiredText("full name"))
-    .max(MAX.FULL_NAME_LENGTH),
+    .transform(removeDoubleSpaces)
+    .required("Required")
+    .max(FULL_NAME.MAX, createMaxText(FULL_NAME.MAX)),
   email: yup
     .string()
+    .trim()
     .email()
-    .required(requiredText("email"))
-    .max(MAX.EMAIL_LENGTH),
+    .required(requiredText)
+    .max(EMAIL.MAX, createMaxText(EMAIL.MAX)),
   password: yup
     .string()
-    .required(requiredText("password"))
-    .max(MAX.PASSWORD_LENGTH),
+    .required(requiredText)
+    .max(PASSWORD.MAX, createMaxText(PASSWORD.MAX)),
   confirmPassword: yup
     .string()
-    .required(requiredText("confirm password"))
-    .max(MAX.PASSWORD_LENGTH)
+    .required(requiredText)
     .when("password", {
       is: (val: string) => val && val.length > 0,
-      then: yup
-        .string()
-        .oneOf([yup.ref("password")], "Both passwords need to match"),
+      then: yup.string().oneOf([yup.ref("password")], confirmPasswordMismatch),
     }),
 });

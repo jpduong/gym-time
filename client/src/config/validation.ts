@@ -1,5 +1,11 @@
-export const MAX = {
-  FULL_NAME_LENGTH: 30,
-  EMAIL_LENGTH: 30,
-  PASSWORD_LENGTH: 20,
+export const FULL_NAME = {
+  MAX: 30,
+};
+
+export const EMAIL = {
+  MAX: 30,
+};
+
+export const PASSWORD = {
+  MAX: 20,
 };
