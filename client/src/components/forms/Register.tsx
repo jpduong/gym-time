@@ -21,7 +21,9 @@ const initialValues = {
 export const fieldNames = Object.keys(initialValues);
 
 export const RegisterForm = () => {
-  const [register, { loading }] = useRegisterMutation({});
+  const [register, { loading }] = useRegisterMutation({
+    onError: (ex) => console.log("EXCEPTION - register", ex),
+  });
   const history = useHistory();
 
   return (
