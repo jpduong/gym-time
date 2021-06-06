@@ -24,7 +24,7 @@ const registerMutation = `mutation($input: RegisterInput!) {
         _id
         email
         fullName
-        isEmailValidated
+        isEmailVerified
       }
       errors {
         field
@@ -48,7 +48,7 @@ describe("User resolver", () => {
       expect(gResponse.user._id).toBeDefined();
       expect(gResponse.user.fullName).toEqual(mockInput.fullName);
       expect(gResponse.user.email).toEqual(mockInput.email);
-      expect(gResponse.user.isEmailValidated).toEqual(false);
+      expect(gResponse.user.isEmailVerified).toEqual(false);
       expect(gResponse.errors).toBeNull();
     });
 

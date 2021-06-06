@@ -12,7 +12,7 @@ routes.get("/confirmation/:token", async (req, res) => {
       user: { _id },
     } = jwt.verify(req.params.token, process.env.EMAIL_SECRET) as JWTPayload;
 
-    await UserModel.update({ isEmailValidated: true }, { where: { _id } });
+    await UserModel.update({ isEmailVerified: true }, { where: { _id } });
   } catch (ex) {
     console.log("EXCEPTION - /confirmation/:token GET", ex);
     res.send("error");

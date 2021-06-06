@@ -25,7 +25,7 @@ export class User {
 
   @Field()
   @prop({ required: true, default: false })
-  isEmailValidated?: boolean;
+  isEmailVerified?: boolean;
 
   @Field()
   @prop({ required: true, default: false })
