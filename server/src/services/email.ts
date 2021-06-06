@@ -15,8 +15,8 @@ const mailgun = mg({
 
 sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
-const updateUserEmailStatus = (user: User) => {
-  return UserModel.updateOne(
+const updateUserEmailStatus = async (user: User) => {
+  return await UserModel.updateOne(
     { _id: user._id },
     { isVerificationEmailSent: true }
   );
