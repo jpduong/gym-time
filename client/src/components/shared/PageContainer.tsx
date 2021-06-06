@@ -10,7 +10,7 @@ export const PageContainer = (props: Props) => {
 
   return (
     <Container maxWidth="xs" title="component-page-container" {...otherProps}>
-      <Box pt={10}>
+      <Box py={10}>
         <Grid container justify="center" alignItems="center" direction="column">
           {children}
         </Grid>
