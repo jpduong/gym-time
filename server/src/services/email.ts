@@ -5,6 +5,7 @@ import mg from "mailgun-js";
 import { CONFIG } from "../config/app";
 import { createEmailVerificationTemplate } from "../email-templates/email-verification";
 import { User, UserModel } from "../graphql/entities/User";
+import { EmailPayload } from "../types/email-payload";
 import { JWTPayload } from "../types/jwt-payload";
 
 const mailgun = mg({
@@ -14,7 +15,26 @@ const mailgun = mg({
 
 sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
+const updateUserEmailStatus = (user: User) => {
+  return UserModel.updateOne(
+    { _id: user._id },
+    { isVerificationEmailSent: true }
+  );
+};
+
 export class EmailService {
+  private async sendEmailWithBackup(emailData: EmailPayload, user: User) {
+    mailgun.messages().send(emailData, function (ex, body) {
+      if (ex) {
+        console.log("EXCEPTION - mailgun sendEmail", ex);
+      }
+
+      if (body) {
+        return updateUserEmailStatus(user);
+      }
+    });
+  }
+
   async sendEmail(user: User) {
     jwt.sign(
       {
@@ -32,27 +52,13 @@ export class EmailService {
         const url = `${CONFIG.API_URL}/confirmation/${emailToken}`;
         const emailData = createEmailVerificationTemplate(user.email, url);
 
-        const updateUserEmailStatus = async () =>
-          await UserModel.updateOne(
-            { _id: user._id },
-            { isVerificationEmailSent: true }
-          );
-
         sgMail
           .send(emailData)
-          .then(() => updateUserEmailStatus())
+          .then(() => updateUserEmailStatus(user))
           .catch((ex) => {
             console.log("EXCEPTION - SendGrid sendEmail", ex);
 
-            mailgun.messages().send(emailData, function (ex, body) {
-              if (ex) {
-                console.log("EXCEPTION - mailgun sendEmail", ex);
-              }
-
-              if (body) {
-                updateUserEmailStatus();
-              }
-            });
+            return this.sendEmailWithBackup(emailData, user);
           });
       }
     );
