@@ -33,6 +33,8 @@ npm install
 $ mongod
 ```
 
+Make sure server environment variables are set (refer to https://github.com/jpduong/gym-time/blob/master/server/.env.example)
+
 2. Start the server
 
 ```
