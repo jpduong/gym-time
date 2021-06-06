@@ -36,7 +36,9 @@ export class UserResolver {
       password: hashedPassword,
     });
 
-    EmailServiceInstance.sendEmail(user);
+    if (user) {
+      EmailServiceInstance.sendEmail(user);
+    }
 
     return {
       user,
