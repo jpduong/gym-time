@@ -10,8 +10,8 @@ beforeEach(() => {
   );
 });
 
-describe("RegisterPage render", () => {
-  it("component", () => {
+describe("RegisterPage", () => {
+  it("should render", () => {
     expect(screen.getByTitle("component-sign-up-page")).toBeTruthy();
   });
 });

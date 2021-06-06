@@ -11,7 +11,7 @@ beforeEach(() => {
 });
 
 describe("App", () => {
-  it("renders", () => {
+  it("should render", () => {
     expect(screen.getByTitle("component-app")).toBeDefined();
   });
 });

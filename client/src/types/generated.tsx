@@ -54,7 +54,9 @@ export type User = {
   __typename?: 'User';
   _id: Scalars['ObjectId'];
   email: Scalars['String'];
-  isEmailValidated: Scalars['Boolean'];
+  fullName: Scalars['String'];
+  isEmailVerified: Scalars['Boolean'];
+  isVerificationEmailSent: Scalars['Boolean'];
 };
 
 export type RegisterMutationVariables = Exact<{

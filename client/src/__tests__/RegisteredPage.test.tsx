@@ -6,7 +6,7 @@ beforeEach(() => {
 });
 
 describe("RegisteredPage", () => {
-  it("renders", () => {
+  it("should render", () => {
     expect(screen.getByTitle("component-registered-page")).toBeDefined();
   });
 });

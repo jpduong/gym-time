@@ -1,11 +1,11 @@
-import { Container } from "@material-ui/core";
 import { Header } from "components/shared/Header";
+import { PageContainer } from "components/shared/PageContainer";
 import React from "react";
 
 export const VerifiedPage = () => {
   return (
-    <Container title="component-verified-page">
+    <PageContainer title="component-verified-page">
       <Header heading="Successfully verified!" color="green" />
-    </Container>
+    </PageContainer>
   );
 };

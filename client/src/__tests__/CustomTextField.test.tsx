@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 
 describe("CustomTextField", () => {
-  it("component renders", () => {
+  it("component should render", () => {
     expect(screen.getByTitle("component-custom-textfield")).toBeTruthy();
   });
 });

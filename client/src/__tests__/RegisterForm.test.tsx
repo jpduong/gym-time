@@ -11,16 +11,16 @@ beforeEach(() => {
   );
 });
 
-describe("RegisterForm render", () => {
-  it("component", () => {
+describe("RegisterForm", () => {
+  it("should render", () => {
     expect(screen.getByTitle("component-register-form")).toBeTruthy();
   });
 
-  it("button", () => {
+  it("button should render", () => {
     expect(screen.getByTitle("component-custom-button")).toBeTruthy();
   });
 
-  it("register click with empty inputs should display required for all textfields", async () => {
+  it("register click with empty inputs should display required state for all textfields", async () => {
     await act(async () => {
       fireEvent.click(screen.getByTitle("component-custom-button"));
     });

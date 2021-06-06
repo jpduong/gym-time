@@ -11,19 +11,11 @@ import { hasPasswordString } from "utils/has-password-string";
 import { toErrorMap } from "utils/to-error-map";
 import { RegisterSchema } from "validation-schemas/register";
 
-// todo - to swap below
 const initialValues = {
   fullName: "",
   email: "",
   password: "",
   confirmPassword: "",
-};
-
-export const validInitialValues = {
-  fullName: "james",
-  email: "james.duong93@gmail.com",
-  password: "password",
-  confirmPassword: "password",
 };
 
 export const fieldNames = Object.keys(initialValues);
@@ -37,18 +29,16 @@ export const RegisterForm = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={async (data, { setErrors }) => {
-          console.log("data", data);
+          const input = omit(data, ["confirmPassword"]);
+          const response = await register({ variables: { input } });
 
-          // const input = omit(data, ["confirmPassword"]);
-          // const response = await register({ variables: { input } });
-
-          // if (response.data?.register?.errors) {
-          //   return setErrors(toErrorMap(response.data.register.errors));
-          // } else if (response.data?.register?.user) {
-          //   return history.push(PATHS.REGISTERED);
-          // }
+          if (response.data?.register?.errors) {
+            return setErrors(toErrorMap(response.data.register.errors));
+          } else if (response.data?.register?.user) {
+            return history.push(PATHS.REGISTERED);
+          }
         }}
-        validationSchema={RegisterSchema} //tofix - reenable
+        validationSchema={RegisterSchema}
       >
         {({ values, errors }) => (
           <Form>
@@ -61,9 +51,6 @@ export const RegisterForm = () => {
               />
             ))}
             <CustomButton text="Sign Up" type="submit" isLoading={loading} />
-            {/* tofix - delete debugging code below */}
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-            <pre>{JSON.stringify(errors, null, 2)}</pre>
           </Form>
         )}
       </Formik>

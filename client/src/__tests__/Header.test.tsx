@@ -10,12 +10,12 @@ beforeEach(() => {
 });
 
 describe("Header", () => {
-  it("renders", () => {
+  it("should render", () => {
     expect(screen.getByTitle("component-header")).toBeDefined();
   });
 
   describe("props", () => {
-    it("heading", () => {
+    it("heading should be defined", () => {
       expect(screen.getByText(mockProps.heading)).toBeDefined();
     });
   });

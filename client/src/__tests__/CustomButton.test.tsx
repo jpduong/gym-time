@@ -11,21 +11,21 @@ beforeEach(() => {
 });
 
 describe("CustomButton", () => {
-  it("component renders", () => {
+  it("component should render", () => {
     expect(screen.getByTitle("component-custom-button")).toBeTruthy();
   });
 
-  it("child loader component does not render on not loading state", () => {
+  it("child loader component should not render on not loading state", () => {
     expect(() => screen.getByTitle("component-custom-button-loader")).toThrow();
   });
 
-  it("child loader component renders on button loading state", () => {
+  it("child loader component should render on button loading state", () => {
     render(<CustomButton {...mockProps} isLoading />);
     expect(screen.getByTitle("component-custom-button-loader")).toBeDefined();
   });
 
   describe("props", () => {
-    it("text", () => {
+    it("text should be defined", () => {
       expect(screen.getByText(mockProps.text)).toBeDefined();
     });
   });
