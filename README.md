@@ -47,7 +47,25 @@ $ cd client
 $ npm start
 ```
 
-## Tech stack:
+## Testing
+
+### Server
+
+Make sure mongodb is running before testing
+
+```
+cd server
+npm test
+```
+
+### Client
+
+```
+cd client
+npm test
+```
+
+## Tech stack
 
 ### Client
 
