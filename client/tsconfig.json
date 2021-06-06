@@ -17,5 +17,5 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
-  "include": ["src", "src/validation-schemas/.ts"]
+  "include": ["src"]
 }
